@@ -1,0 +1,125 @@
+<!doctype HTML>
+<html>
+  
+    <head>
+        <title></title>
+        <style>
+             img{
+                    width:200px;
+                    height:275px;
+    
+                    
+                }
+                body{
+                    background-color:pink;
+                    font-size:120%
+                }
+               
+                
+                h1 {
+                    color: black;
+                    font-family:Georgia, 'Times New Roman', Times, serif;
+                    font-size: 350%;
+                     color:white ;
+                }
+                img {
+                     border: 12px solid plum;
+                }
+
+                p {
+                    font-size: 100%;
+                }
+            
+              
+              
+            </style>
+       
+    
+        <script>
+            //global variables
+            var pr1 = 15 ,Wpr1=12;
+            var pr2 = 15, Wpr2=8;
+            var pr3 = 15, Wpr3=10;
+               
+            function initPrices(){
+               
+                document.getElementById("span1").innerHTML = "Price: $"+pr1;
+                document.getElementById("span2").innerHTML = "Price: $"+pr2;
+                document.getElementById("span3").innerHTML = "Price: $"+pr3;
+                
+            }
+            function ProcessOrder(){
+                var q1=parseInt(document.getElementById("qty1").value);
+                var q2=parseInt(document.getElementById("qty2").value);
+                var q3=parseInt(document.getElementById("qty3").value);
+                var subtot=(pr1 *q1)+(pr2 *q2)+(pr3 *q3);
+                var tax = subtot * 0.0875;
+                var shipping = 0 ;
+                
+                if (subtot<100 ){
+                    shipping = 25;
+                }else if (subtot>=100 && subtot <=200){
+                    shipping = 15;
+                }else{
+                    shipping = 0;
+                }
+                var custtot = subtot + tax + shipping;
+                var itemsold=q1+q2+q3;
+                var companysubtotal = (q1*Wpr1)+(q2*Wpr2)+(q1*Wpr3);
+                var profit =subtot-companysubtotal;
+                var build = "";
+
+                build += "Subtotal:               $" + subtot.toFixed(2) +"<br>";
+                build += "Tax:                    $" + tax.toFixed(2) +"<br>";
+                build += "Shipping & Handling:    $" + shipping.toFixed(2)+"<br>";
+                build += "Customer Total:         $" + custtot.toFixed(2)+"<br>";
+
+                build += "Total Items sold :      $" + itemsold.toFixed(2) +"<br>";
+                build += "Customer Subtotal:      $" + subtot.toFixed(2) +"<br>";
+                build += "Company Subtotal:       $" + companysubtotal.toFixed(2) +"<br>";
+                build += "Profit/Loss:            $" + profit.toFixed(2) +"<br>";
+                var output=document.getElementById("output");
+                output.innerHTML = build;
+            }
+
+
+            
+
+
+        </script>        
+    </head>
+    <body onload="initPrices()">
+            <h1 align="center"> Cristals Boutique</h1>
+                
+        
+             <!---Item 1-->
+                <div>
+                    <img src ="img1.jpg"><br>
+                    
+                    <P> An oversized sweater-knit top featuring a turtleneck, dropped shoulders, long sleeve. </p>
+                    <br>
+                    <span id="span1"> </span> <br>
+                    <input type="text" id="qty1" placeholder="Enter Qty">
+                </div>
+                <hr>
+                <!--Item 2-->
+                   <div>
+                  <img src ="img2.jpeg"><br>
+                   <p> A pair of ankle-cut mom jeans featuring a high waist</p>
+                   <br>
+                    <span id="span2"> </span><br>
+                    <input type="text" id="qty2" placeholder="Enter Qty">
+                </div>
+                <hr>
+                <!--Item 3-->
+                   <div>
+                    <img src ="img3.jpg"><br>
+                    <p>Black turtle neck cropped top with short sleves.</p><br>
+                    <span id="span3"> </span><br>
+                    <input type="text" id="qty3" placeholder="Enter Qty">
+                </div>
+                <button onclick="ProcessOrder()"> Process order </button>
+                <br>
+                <div id="output"></div>
+    </body>
+    </html>
